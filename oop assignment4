@@ -1,0 +1,105 @@
+import java.util.Scanner;
+public abstract class Shape {
+	double length;
+	double breadth;
+	Scanner sc=new Scanner(System.in);
+
+	public Shape() {
+		
+	}
+	public Shape(double length, double breadth) {
+		
+		this.length = length;
+		this.breadth = breadth;
+	}
+
+
+    public void accept() {
+	System.out.println("enter the length ");
+	this.length=sc.nextDouble();
+	System.out.println("enter the breadth ");
+	this.breadth=sc.nextDouble();
+    }
+    public void display() {
+    	System.out.println("the length is:"+this.length);
+    	System.out.println("the breadth is:"+this.breadth);
+    }
+
+    public abstract double computeArea() ;
+}
+
+class Triangle extends Shape{
+
+	public Triangle() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Triangle(double length, double breadth) {
+		super(length, breadth);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void accept() {
+		// TODO Auto-generated method stub
+		super.accept();
+	}
+
+	@Override
+	public void display() {
+		// TODO Auto-generated method stub
+		super.display();
+	}
+
+	@Override
+	public double computeArea() {
+
+	    double area =(0.5)*length*breadth;
+	    System.out.println("Area of triangle :"+ area);
+		return 0;
+	}
+}
+class Rectangle extends Shape{
+
+	public Rectangle() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Rectangle(double length, double breadth) {
+		super(length, breadth);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void accept() {
+		// TODO Auto-generated method stub
+		super.accept();
+	}
+
+	@Override
+	public void display() {
+		// TODO Auto-generated method stub
+		super.display();
+	}
+
+	@Override
+	public double computeArea() {
+		double area= length * breadth;
+		System.out.println("area of rectangle is:"+area);
+		return 0;
+	}
+}
+class Main{
+	public static void main(String[]args) {
+		Rectangle r= new Rectangle();
+		Triangle t= new Triangle();
+		r.accept();
+		r.display();
+		r.computeArea();
+    	t.accept();
+    	t.display();
+    	t.computeArea();
+	}
+}
