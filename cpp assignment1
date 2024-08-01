@@ -1,0 +1,112 @@
+// Online C++ compiler to run C++ program online
+#include<cstring>
+#include <iostream>
+using namespace std;
+struct Student{
+   int rollno;
+    float sgpa;
+    char name[40];
+};
+class SDB{
+    private:
+      Student s[15];
+      int n;
+    public:
+      SDB(void){
+          n=0; }
+      void accept(void);
+      void display(void);
+      void sortroll(void);
+      void sortname(void);
+      void sorttopper(void);
+      void searchsgpa(float sgpa);
+     
+};   
+
+void SDB ::accept (void){
+    int i;
+    cout<<"how many records:";
+    cin>>n;
+    for(i=0;i<n;i++)
+    {
+        cout<<"enter roll no:"<<endl;
+        cin>>s[i].rollno;
+        cout<<"enter name:"<<endl;
+        cin>>s[i].name;
+        cout<<"enter the sgpa:"<<endl;
+        cin>>s[i].sgpa;
+    }
+}
+void SDB::display(void){
+    int i;
+    cout<<"records of student:"<<endl;
+    for(i=0;i<n;i++){
+        cout<<"roll no:"<<s[i].rollno<<endl;
+        cout<<"name:"<<s[i].name<<endl;
+        cout<<"sgpa:"<<s[i].sgpa<<endl;
+    }
+}
+  void SDB::sortroll(void){
+    int i,j;
+    Student temp;
+    for(i=1;i<n-1;i++)
+    {
+       for(j=0;j=n-2;j++)
+       {
+           if (s[j].rollno>s[j+1].rollno)
+           {
+               temp=s[j];
+               s[j]=s[j+1];
+               s[j+1]=temp;
+           }
+       }
+    }
+  }
+void SDB::sortname(void){
+     int i,j;
+    Student temp;
+   for(i=1;i<n-1;i++)
+    {
+       int j=1;
+       while(j>0&& strcmp(s[j].name,s[j+1].name)>0)
+           {
+               temp=s[j];
+               s[j]=s[j+1];
+               s[j+1]=temp;
+               j--;Curriculum for Second Year of Information Technology (2019 Course), Savitribai Phule Pune University
+SE (Information Technology) Syllabus (2019 Course) 34
+landmarks and links should represent the distance between them. Find the shortest path using
+Dijkstra's algorithm from single source to all destination.
+9. Heap Sort -- CO1, CO2, CO4
+Implement Heap sort to sort given set of values using max or min heap.
+10. FILE Handling -- C
+           }
+       }
+    }
+void SDB:: searchsgpa(float sgpa){
+    bool found = false;
+    
+    for(int i=0;i<n;i++){
+        if(s[i].sgpa==sgpa){
+            cout<<"sgpa"<<s[i].sgpa<<"name"<<s[i].name<<"rollno"<<s[i].rollno;
+            found=true;
+        }
+    }
+}
+int main(void){
+    SDB d;
+    d.accept();
+    d.display();
+    
+    cout<<"sort by rollno";
+    d.sortroll();
+    d.display();
+    
+    cout<<"sort by name";
+    d.sortname();
+    d.display();
+    
+    d.searchsgpa(sgpa);
+
+    return 0;
+}
