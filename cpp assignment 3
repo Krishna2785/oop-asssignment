@@ -1,0 +1,124 @@
+# include <iostream>
+using namespace std;
+# define size 5
+
+class CQ{
+    private: 
+            int a[size];
+            int f;//front
+            int r;//rear
+            
+    public:
+          CQ(void){
+          f=r=0;}
+          int qfull(void);
+          int qempty(void);
+          void insertq(int item);
+          int deleteq(void);
+          int frontele(void);
+          int rearele(void);
+          void dispq(void);
+          };
+          
+int CQ:: qfull(void){
+
+     if((r+1) % size ==f)
+     {
+         return (1);
+     }
+     else{
+         return (0);
+      }
+     }
+  
+int CQ::qempty (void){
+   
+    if (f==r){
+       return (1);
+       }
+    else{
+       return (0);
+       }
+       }
+
+void CQ :: insertq(int item){
+      if (qempty()==1){
+      r=(r+1)%size;
+      a[r]=item;
+      }
+    }
+    
+int CQ :: deleteq(void){   
+    f=(f+1)%size;
+    return (a[f]);
+    }
+    
+int CQ:: frontele(void){
+     return a[((f+1)% size)];
+    }
+    
+int CQ:: rearele(void){
+      return (a[r]);
+      }
+    
+void CQ:: dispq(void){
+     int i;
+     i=(f+1)%size;
+     while(i!=(r+1)%size)
+        {
+          cout<< a[i];
+          i=(i+1)%size;
+        }
+      }
+    
+int main(void)
+{
+   int option;
+   CQ q;
+   int val = q.qempty();
+   if(val==1){ 
+   do
+   {
+     cout<<"1.insert \n";
+     cout<<"2.delete \n";
+     cout<<"3.front \n";
+     cout<<"4.rear \n";     
+     cout<<"5.display \n";
+     cout<<"6.exit \n";   
+     cout<<"enter your option\n";
+     cin>> option;
+     cout<<" \n";
+     switch(option)
+     {
+       case 1:
+             cout<<" \n";
+             q.insertq(5);
+             break;
+       case 2:
+             q.deleteq();
+             break;
+       case 3:
+             
+             cout<<q.frontele()<<endl;
+             break;
+       case 4:
+            
+              cout<< q.rearele()<<endl;
+             break;
+       case 5:
+             q.dispq();
+             cout<<" \n";
+             break;
+       case 6:
+             exit (0);
+             break;
+       default: cout<<"Invalid";                        
+    } 
+   }while(1);
+   }
+   else{
+      cout<<" list is full";
+   }
+   
+return 0;
+}
