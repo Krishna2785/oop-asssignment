@@ -1,0 +1,261 @@
+import java.util.Scanner;
+
+class Account {
+    private String accountId;
+    private String accountType;
+    private double balance;
+
+    public Account(String accountId, String accountType, double balance) {
+        this.accountId = accountId;
+        this.accountType = accountType;
+        this.balance = balance;
+    }
+
+    public void setBalance(double amount) {
+        this.balance = amount;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+}
+
+class Bank {
+    private Account[] accounts;
+    private int accountCount;
+    private static final int MAX_ACCOUNTS = 100;
+
+    public Bank() {
+        accounts = new Account[MAX_ACCOUNTS];
+        accountCount = 0;
+    }
+
+    public void createAccount(Account account) {
+        if (accountCount < MAX_ACCOUNTS) {
+            accounts[accountCount] = account;
+            accountCount++;
+            System.out.println("Account created successfully.");
+        } else {
+            System.out.println("Account limit reached. Cannot create more accounts.");
+        }
+    }
+
+    public boolean withdrawAmount(String accountId, double amount) {
+        for (int i = 0; i < accountCount; i++) {
+            if (accounts[i].getAccountId().equals(accountId)) {
+                if (amount <= accounts[i].getBalance()) {
+                    accounts[i].setBalance(accounts[i].getBalance() - amount);
+                    System.out.println("Withdrawal successful.");
+                    return true;
+                } else {
+                    System.out.println("Insufficient balance.");
+                }
+            }
+        }
+        System.out.println("Account not found.");
+        return false;
+    }
+
+    public void depositAmount(String accountId, double amount) {
+        for (int i = 0; i < accountCount; i++) {
+            if (accounts[i].getAccountId().equals(accountId)) {
+                accounts[i].setBalance(accounts[i].getBalance() + amount);
+                System.out.println("Amount deposited successfully.");
+                return;
+            }
+        }
+        System.out.println("Account not found.");
+    }
+
+    public Account getAccount(String accountId) {
+        for (int i = 0; i < accountCount; i++) {
+            if (accounts[i].getAccountId().equals(accountId)) {
+                return accounts[i];
+            }
+        }
+        return null; // Account not found
+    }
+
+    public String displayInfo(String accountId) {
+        Account account = getAccount(accountId);
+        if (account != null) {
+            return String.format("Account ID: %s\nAccount Type: %s\nBalance: %.2f",
+                    account.getAccountId(), account.getAccountType(), account.getBalance());
+        }
+        return "Account not found.";
+    }
+}
+
+class Customer {
+    private String name;
+    private int age;
+    private String accountId;
+
+    public Customer(String name, int age, String accountId) {
+        this.name = name;
+        this.age = age;
+        this.accountId = accountId;
+    }
+
+    public String getCustomerName() {
+        return name;
+    }
+
+    public int getCustomerAge() {
+        return age;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+}
+
+class SavingAccount extends Account {
+    private double minBalance;
+
+    public SavingAccount(String accountId, double balance, double minBalance) {
+        super(accountId, "Savings", balance);
+        this.minBalance = minBalance;
+    }
+
+    public double getMinimumBalance() {
+        return minBalance;
+    }
+
+    @Override
+    public void setBalance(double amount) {
+        if (amount >= minBalance) {
+            super.setBalance(amount);
+        } else {
+            System.out.println("Balance cannot be less than minimum balance of " + minBalance);
+        }
+    }
+}
+
+public class BankingApplication {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static Bank bank = new Bank();
+    private static Customer customer = null;
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\n1. Create Account");
+            System.out.println("2. Display Account Info");
+            System.out.println("3. Check Balance");
+            System.out.println("4. Deposit Amount");
+            System.out.println("5. Withdraw Amount");
+            System.out.println("6. Exit");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    createAccount();
+                    break;
+                case 2:
+                    displayAccountInfo();
+                    break;
+                case 3:
+                    checkBalance();
+                    break;
+                case 4:
+                    depositAmount();
+                    break;
+                case 5:
+                    withdrawAmount();
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
+        }
+    }
+
+    private static void createAccount() {
+        if (customer == null) {
+            System.out.print("Enter your name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter your age: ");
+            int age = scanner.nextInt();
+            while (age < 18) {
+                System.out.println("Minimum age should be 18 to create an account.");
+                System.out.print("Please enter valid age: ");
+                age = scanner.nextInt();
+            }
+
+            System.out.print("Enter your account ID: ");
+            String accountId = scanner.next();
+            System.out.print("Enter initial balance: ");
+            double balance = scanner.nextDouble();
+            System.out.print("Enter minimum balance: ");
+            double minBalance = scanner.nextDouble();
+
+            customer = new Customer(name, age, accountId);
+            SavingAccount savingAccount = new SavingAccount(accountId, balance, minBalance);
+            bank.createAccount(savingAccount);
+        } else {
+            System.out.println("Account already created.");
+        }
+    }
+
+    private static void displayAccountInfo() {
+        if (customer != null) {
+            String info = bank.displayInfo(customer.getAccountId());
+            System.out.println("Welcome " + customer.getCustomerName() + "!\n" + info);
+        } else {
+            System.out.println("No account found. Please create an account first.");
+        }
+    }
+
+    private static void checkBalance() {
+        if (customer != null) {
+            Account account = bank.getAccount(customer.getAccountId());
+            if (account != null) {
+                System.out.println("Balance is: " + account.getBalance());
+            } else {
+                System.out.println("No account found. Please create an account first.");
+            }
+        } else {
+            System.out.println("No account found. Please create an account first.");
+        }
+    }
+
+    private static void depositAmount() {
+        if (customer != null) {
+            System.out.print("Enter the amount you want to deposit: ");
+            double amount = scanner.nextDouble();
+            bank.depositAmount(customer.getAccountId(), amount);
+        } else {
+            System.out.println("No account found. Please create an account first.");
+        }
+    }
+
+    private static void withdrawAmount() {
+        if (customer != null) {
+            System.out.print("Enter the amount you want to withdraw: ");
+            double amount = scanner.nextDouble();
+            if (bank.withdrawAmount(customer.getAccountId(), amount)) {
+                Account account = bank.getAccount(customer.getAccountId());
+                if (account != null) {
+                    System.out.println("New balance is: " + account.getBalance());
+                }
+            }
+        } else {
+            System.out.println("No account found. Please create an account first.");
+        }
+    }
+}
