@@ -1,9 +1,9 @@
-package assignment8;
+package prac8;
 import java.io.*;
 import java.util.Scanner;
-
-public class StudentRecords {
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+class StudentRecords
+{
+	 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	 public void addRecords() throws IOException
 	 {
 		 // Create or Modify a file for Database
@@ -163,7 +163,3 @@ public class StudentRecords {
 		 call.showMenu();
 	 }
 }
-
-
-
-	
