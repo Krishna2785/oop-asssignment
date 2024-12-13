@@ -1,0 +1,241 @@
+import java.util.Scanner;
+import java.lang.Math;
+
+ class Employee {
+    String employeeName;
+    int employeeID;
+    String status;
+    String employeeMail;
+    String employeeAd;
+    int employeeMob;
+    double basicPay;
+    Scanner sc = new Scanner(System.in);
+
+    void getData(){
+        System.out.print("Name: ");
+        employeeName = sc.nextLine();
+        System.out.print("ID: ");
+        employeeID = sc.nextInt();
+        System.out.print("Mail: ");
+        employeeMail = sc.nextLine();
+        System.out.print("Address: ");
+        employeeAd = sc.nextLine();
+        System.out.print("Mobile Number: ");
+        employeeMob = sc.nextInt();
+    }
+
+    void displayData(){
+        System.out.println("----------Personal Info----------");
+        System.out.println("Name            : " + this.employeeName);
+        System.out.println("ID              : " + this.employeeID);
+        System.out.println("Status          : " + this.status);
+        System.out.println("Mail            : " + this.employeeMail);
+        System.out.println("Address         : " + this.employeeAd);
+        System.out.println("Mobile No       : " + this.employeeMob);
+        System.out.print("\n");
+    }
+
+}
+ class Programmer extends Employee {
+    Scanner sc = new Scanner(System.in);
+
+    double da;
+    double hra;
+    double pf;
+    double clubFee;
+    double grossSalary;
+    double netSalary;
+
+    public Programmer(){
+        System.out.println("Enter Programmer's Data");
+        getData();
+        getBasicPay();
+        status = "Programmer";
+        displayData();
+        generateSlip();
+    }
+    void getBasicPay(){
+        System.out.print("Basic Salary : ");
+        basicPay = sc.nextDouble();
+        System.out.println("\n");
+        da = 0.97*basicPay;
+        hra = 0.10*basicPay;
+        pf = 0.12*basicPay;
+        clubFee = 0.001*basicPay;
+        grossSalary = basicPay + da + hra;
+        netSalary = grossSalary - pf - clubFee;
+
+    }
+    void generateSlip(){
+        System.out.println("-----------Pay Slip-----------");
+        System.out.println("Basic Pay       : " + this.basicPay);
+        System.out.println("DA              : " + this.da);
+        System.out.println("HRA             : " + this.hra);
+        System.out.println("PF              : " + this.pf);
+        System.out.println("Gross Salary    : " + this.grossSalary);
+        System.out.println("Net Salary      : " + this.netSalary);
+        System.out.print("\n\n");
+    }
+
+
+}
+ class ProjectManager extends Employee {
+    Scanner sc = new Scanner(System.in);
+    double da;
+    double hra;
+    double pf;
+    double clubFee;
+    double grossSalary;
+    double netSalary;
+
+    public ProjectManager(){
+        System.out.println("Enter Project Manager's Data");
+        getData();
+        getBasicPay();
+        status = "Project Manager";
+        displayData();
+        generateSlip();
+    }
+    void getBasicPay() {
+        System.out.print("Basic Salary : ");
+        basicPay = sc.nextDouble();
+        System.out.println("\n");
+        da = 0.97 * basicPay;
+        hra = 0.10 * basicPay;
+        pf = 0.12 * basicPay;
+        clubFee = 0.001 * basicPay;
+        grossSalary = basicPay + da + hra;
+        netSalary = grossSalary - pf - clubFee;
+    }
+    void generateSlip(){
+        System.out.println("-----------Pay Slip-----------");
+        System.out.println("Basic Pay       : " + this.basicPay);
+        System.out.println("DA              : " + this.da);
+        System.out.println("HRA             : " + this.hra);
+        System.out.println("PF              : " + this.pf);
+        System.out.println("Gross Salary    : " + this.grossSalary);
+        System.out.println("Net Salary      : " + this.netSalary);
+        System.out.print("\n\n");
+    }
+
+}
+ class AsstManager extends Employee {
+        Scanner sc = new Scanner(System.in);
+        double da;
+        double hra;
+        double pf;
+        double clubFee;
+        double grossSalary;
+        double netSalary;
+
+        public AsstManager(){
+            System.out.println("-----Programmer`s Data-----");
+            getData();
+            getBasicPay();
+            super.status = "Asst. Manager";
+            displayData();
+            generateSlip();
+        }
+        void getBasicPay(){
+            System.out.print("Basic Salary : ");
+            System.out.println("\n");
+            basicPay = sc.nextDouble();
+            da = 0.97*basicPay;
+            hra = 0.10*basicPay;
+            pf = 0.12*basicPay;
+            clubFee = 0.001*basicPay;
+            grossSalary = basicPay + da + hra;
+            netSalary = grossSalary - pf - clubFee;
+        }
+        void generateSlip(){
+            System.out.println("-----------Pay Slip-----------");
+            System.out.println("Basic Pay       : " + this.basicPay);
+            System.out.println("DA              : " + this.da);
+            System.out.println("HRA             : " + this.hra);
+            System.out.println("PF              : " + this.pf);
+            System.out.println("Gross Salary    : " + this.grossSalary);
+            System.out.println("Net Salary      : " + this.netSalary);
+            System.out.print("\n\n");
+        }
+}
+ class TeamLeader extends Employee {
+    Scanner sc = new Scanner(System.in);
+
+
+    double da;
+    double hra;
+    double pf;
+    double clubFee;
+    double grossSalary;
+    double netSalary;
+
+    public TeamLeader(){
+        System.out.println("Enter Team Leader's Data");
+        getData();
+        getBasicPay();
+        status = "Team Leader";
+        displayData();
+        generateSlip();
+    }
+    void getBasicPay(){
+        System.out.print("Basic Salary : ");
+        basicPay = sc.nextDouble();
+        System.out.println("\n");
+        da = 0.97*basicPay;
+        hra = 0.10*basicPay;
+        pf = 0.12*basicPay;
+        clubFee = 0.001*basicPay;
+        grossSalary = basicPay + da + hra;
+        netSalary = grossSalary - pf - clubFee;
+    }
+    void generateSlip(){
+        System.out.println("-----------Pay Slip-----------");
+        System.out.println("Basic Pay       : " + this.basicPay);
+        System.out.println("DA              : " + this.da);
+        System.out.println("HRA             : " + this.hra);
+        System.out.println("PF              : " + this.pf);
+        System.out.println("Gross Salary    : " + this.grossSalary);
+        System.out.println("Net Salary      : " + this.netSalary);
+        System.out.print("\n\n");
+    }
+
+}
+ class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            System.out.println("Generate Pay Slip for Employee\n");
+            System.out.println("1 : Programmer");
+            System.out.println("2 : Project Manager");
+            System.out.println("3 : Asst. Manager");
+            System.out.println("4 : Team Leader");
+            System.out.println("5 : Exit");
+            System.out.print("\n");
+
+            int ope;
+            System.out.print("Enter Your Choice : ");
+            ope = sc.nextInt();
+            System.out.print("\n");
+
+            switch (ope){
+                case 1 :
+                    Programmer p = new Programmer();
+                    break;
+                case 2 :
+                    ProjectManager m = new ProjectManager();
+                    break;
+                case 3 :
+                    AsstManager a = new AsstManager();
+                    break;
+                case 4 :
+                    TeamLeader l = new TeamLeader();
+                    break;
+                case 5 :
+                    System.exit(0);
+                default:
+                    System.out.println("Enter Valid Info..");
+            }
+        }
+    }
+}
