@@ -1,0 +1,164 @@
+import java.util.Scanner;
+
+interface Vehicle {
+    public void changeGear(int a);
+    public void speedUp(int a);
+    public void applyBreaks(int a);
+    public void display();
+}
+class Bicycle implements Vehicle{
+    private int gear;
+    private int speed;
+    final int maxSpeed = 50;
+
+    @Override
+    public void changeGear(int a){
+        if(a > 0){
+            gear = a;
+        }
+        else{
+            System.out.println("Gear cannot be Negative.");
+        }
+
+    }
+
+    @Override
+    public void applyBreaks(int a) {
+        speed -= a;
+    }
+
+    @Override
+    public void speedUp(int a){
+        if(speed+a <= maxSpeed){
+            speed += a;
+        }
+        else{
+            System.out.println("Maximum Speed of Bicycle is " + maxSpeed);
+        }
+
+    }
+    @Override
+    public void display(){
+        System.out.println("Speed of Bicycle : " + speed);
+        System.out.println("Gear of Bicycle : " + gear);
+    }
+
+}
+class Bike implements Vehicle{
+    private int gear;
+    private int speed;
+    final int maxSpeed = 180;
+
+    @Override
+    public void changeGear(int a){
+        if(a > 0){
+            gear = a;
+        }
+        else{
+            System.out.println("Gear cannot be Negative.");
+        }
+    }
+
+    @Override
+    public void applyBreaks(int a) {
+        speed -= a;
+    }
+
+    @Override
+    public void speedUp(int a){
+        if(speed+a <= maxSpeed){
+            speed += a;
+        }
+        else{
+            System.out.println("Maximum Speed of Bike is " + maxSpeed);
+        }
+    }
+    @Override
+    public void display(){
+        System.out.println("Speed of Bike : " + speed);
+        System.out.println("Gear of Bike : " + gear);
+    }
+}
+class Car implements Vehicle{
+    private int gear;
+    private int speed = 0;
+    final int maxSpeed = 240;
+
+    @Override
+    public void changeGear(int a){
+        if(a > 0){
+            gear = a;
+        }
+        else{
+            System.out.println("Gear cannot be Negative.");
+        }
+    }
+
+    @Override
+    public void applyBreaks(int a) {
+        speed -= a;
+    }
+
+    @Override
+    public void speedUp(int a){
+        if(speed+a <= maxSpeed){
+            speed += a;
+        }
+        else{
+            System.out.println("Maximum Speed of Car is " + maxSpeed);
+        }
+    }
+    @Override
+    public void display(){
+        System.out.println("Speed of Car : " + speed);
+        System.out.println("Gear of Car : " + gear);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Bicycle b1 = new Bicycle();
+        Bike b2 = new Bike();
+        Car c1 = new Car();
+
+       while(true){
+           System.out.println("\nSelect");
+           System.out.println("1.Change Gear");
+           System.out.println("2.Speed Up");
+           System.out.println("3.Apply Break");
+           System.out.println("4.Display Speed and Gear");
+           System.out.println("5.Exit\n");
+
+           int choice;
+           System.out.print("Enter Your Choice : ");
+           choice = sc.nextInt();
+           System.out.println("");
+           switch (choice){
+               case 1:
+                   int tempGear;
+                   System.out.print("Enter the Gear That You Want to Change to: ");
+                   tempGear = sc.nextInt();
+                   b1.changeGear(tempGear);
+                   break;
+               case 2:
+                   int tempSpeed;
+                   System.out.print("Enter The Value of Speed: ");
+                   tempSpeed = sc.nextInt();
+                   b1.speedUp(tempSpeed);
+                   break;
+               case 3:
+                   int temp;
+                   System.out.print("Enter The Value of Speed That You Want to Decrement: ");
+                   temp = sc.nextInt();
+                   b1.applyBreaks(temp);
+                   break;
+               case 4:
+                   b1.display();
+                   break;
+               case 5:
+                   System.out.println("Exiting The Program..");
+                   System.exit(0);
+           }
+       }
+    }
+}
