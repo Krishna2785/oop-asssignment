@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+abstract class Shape {
+    protected double base;
+    protected double height;
+    Scanner sc = new Scanner(System.in);
+
+    Shape(){
+        base = 0;
+        height = 0;
+    }
+    abstract void getDim();
+
+    abstract void computArea();
+
+}
+ class Triangle extends Shape{
+    
+    @Override
+    void getDim(){
+        System.out.println("Enter Triangle's Dimension : ");
+        System.out.print("Enter Base : ");
+        base = sc.nextDouble();
+        System.out.print("Enter Height : ");
+        height = sc.nextDouble();
+        System.out.println();
+    }
+
+    @Override
+    void computArea(){
+        System.out.println("Area of Triangle : " + (this.base*this.height)/2  + " sq. units "+ "\n\n" );
+    }
+
+}
+ class Rectangle extends Shape{
+    @Override
+    public void getDim(){
+        System.out.println("Enter Rectangle's Dimension : ");
+        System.out.print("Enter Width : ");
+        base = sc.nextDouble();
+        System.out.print("Enter Height : ");
+        height = sc.nextDouble();
+        System.out.println();
+    }
+
+    @Override
+    void computArea(){
+        System.out.println("Area of Rectangle : " + this.base*this.height + " sq. units " + "\n\n");
+    }
+
+
+}
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Triangle t = new Triangle();
+        Rectangle r = new Rectangle();
+
+        while (true){
+            System.out.println("-----Area Calculator-----\n");
+            System.out.println("Enter");
+            System.out.println("1.Calculate Area of Triangle.");
+            System.out.println("2.Calculate Area of Reactangle.");
+            System.out.println("3.Exit.\n");
+
+            int choice;
+            System.out.print("Enter Your choice : ");
+            choice = sc.nextInt();
+            System.out.println();
+
+            switch (choice){
+                case 1 :
+                    t.getDim();
+                    t.computArea();
+                    break;
+                case 2 :
+                    r.getDim();
+                    r.computArea();
+                    break;
+                case 3 :
+                    System.out.println("Exiting The Program..");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid Input..\n\n");
+            }
+        }
+
+
+    }
+}
