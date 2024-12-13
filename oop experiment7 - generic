@@ -1,0 +1,156 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+// Generic Class with Type Parameter T
+class Generic<T> {
+    Scanner sc = new Scanner(System.in);
+    ArrayList<T> array = new ArrayList<>();
+
+    // Method to accept user input
+    public void getData() {
+        System.out.print("Enter the number of elements you want to add to the array: ");
+        int n = sc.nextInt();
+
+        System.out.print("Enter array elements: ");
+        for (int i = 0; i < n; i++) {
+            T temp = (T) sc.next();
+            array.add(temp);
+        }
+
+        displayArray();
+    }
+
+    public void displayArray() {
+        System.out.println();
+        System.out.println("Array: " + array);
+        System.out.println();
+    }
+
+    // Check if number is even
+    private boolean isEven(int num) {
+        return num % 2 == 0;
+    }
+
+    // Check if number is odd
+    private boolean isOdd(int num) {
+        return num % 2 != 0;
+    }
+
+    // Check if number is prime
+    private boolean isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i < Math.sqrt(num) + 1; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Check if a string is a palindrome
+    private boolean isPalindrome(String str) {
+        String reverseStr = "";
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reverseStr += str.charAt(i);
+        }
+        return str.equals(reverseStr);
+    }
+
+    // Print even numbers
+    public void printEvenNumbers() {
+        System.out.println("Even Numbers are: ");
+        for (int i = 0; i < array.size(); i++) {
+            int num = Integer.parseInt((String) array.get(i));
+            if (isEven(num)) {
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    // Print odd numbers
+    public void printOddNumbers() {
+        System.out.println("Odd Numbers are: ");
+        for (int i = 0; i < array.size(); i++) {
+            int num = Integer.parseInt((String) array.get(i));
+            if (isOdd(num)) {
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    // Print prime numbers
+    public void printPrimeNumbers() {
+        System.out.println("Prime Numbers are: ");
+        for (int i = 0; i < array.size(); i++) {
+            int num = Integer.parseInt((String) array.get(i));
+            if (isPrime(num)) {
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    public void printPalindromes() {
+        System.out.println("Palindromes are: ");
+        for (int i = 0; i < array.size(); i++) {
+            String temp = (String) array.get(i);
+            if (isPalindrome(temp)) {
+                System.out.print(temp + " ");
+            }
+        }
+        System.out.println();
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        boolean flag = true;
+
+        while (flag) {
+            System.out.println("a. Integer Array.");
+            System.out.println("b. String Array.");
+            System.out.println("c. Exit.");
+            System.out.println();
+
+            System.out.print("Enter Your Choice : ");
+            char choice = sc.next().charAt(0);
+            System.out.println();
+
+            switch (choice) {
+                case 'a':
+                    Generic<Integer> intArray = new Generic<>();
+                    intArray.getData();
+                    intArray.printEvenNumbers();
+                    intArray.printOddNumbers();
+                    intArray.printPrimeNumbers();
+                    System.out.println();
+                    break;
+
+                case 'b':
+                    Generic<String> stringArray = new Generic<>();
+                    stringArray.getData();
+                    stringArray.printPalindromes();
+                    System.out.println();
+                    break;
+
+                case 'c':
+                    flag = false;
+                    System.out.println("Exiting the program..");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Please select a valid option.");
+                    break;
+            }
+        }
+
+        sc.close();
+    }
+}
+
+
