@@ -92,3 +92,8 @@ public class Main {
 //        s1.displayData();
     }
 }
+
+Output:
+Hatchback with accessories: Hatchback-specific accessories, Compact wheels, Hatchback paint job
+Sedan with accessories: Sedan-specific accessories, Luxury wheels, Sedan paint job
+SUV with accessories: SUV-specific accessories, All-terrain tires, SUV paint job
